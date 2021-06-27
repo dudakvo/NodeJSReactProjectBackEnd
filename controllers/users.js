@@ -72,5 +72,51 @@ const logout = async (req, res, next) => {
   }
 }
 
+// данные текущего пользователя
+const getCurrentUser = async (req, res, next) => {
+  try {
+    const { email, subscription } = req.user
+    const currentUser = await Users.findByEmail(email)
+    if (!currentUser) {
+      return res.status(HttpCode.UNATHORIZED).json({
+        status: 'error',
+        code: HttpCode.UNATHORIZED,
+        message: 'Not authorized'
+      })
+    }
+    return res.status(HttpCode.OK).json({
+      status: 'success',
+      code: HttpCode.OK,
+      data: { email, subscription }
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
+// обновление подписки
+const updateSubscription = async (req, res, next) => {
+  try {
+    const { id } = req.user
+    const user = await Users.updateUserSubscription(id, req.body)
+    const { email, subscription } = user
+    if (user) {
+      return res.status(HttpCode.OK).json({
+        status: 'success',
+        code: HttpCode.OK,
+        data: { email, subscription }
+      })
+    }
+    return res.status(HttpCode.UNATHORIZED).json({
+      status: 'error',
+      code: HttpCode.UNATHORIZED,
+      message: 'Not authorized'
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
-  reg, login, logout,}
+  reg, login, logout, getCurrentUser, updateSubscription
+}

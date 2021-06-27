@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const { Subscription, HttpCode } = require('../../../helpers/constants')
+const { Subscription, HttpCode } = require('../../helpers/constants')
 
 const schemaSignup = Joi.object({
   email: Joi.string()

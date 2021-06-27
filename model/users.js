@@ -1,6 +1,6 @@
 // const { options } = require('joi')
 // const { token } = require('morgan')
-const User = require('./schemas/user')
+const User = require('../model/schemas/user')
 
 // найти по id (логаут)
 const findById = async (id) => {

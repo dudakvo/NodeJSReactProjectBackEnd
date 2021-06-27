@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const guard = require('../../../helpers/guard')
-const { reg, login, logout, getCurrentUser, updateSubscription } = require('../../../controllers/users')
+const guard = require('../../helpers/guard')
+const { reg, login, logout,getCurrentUser,updateSubscription} = require('../../controllers/users')
 const { validateSignup, validateLogin, validateUpdateSubcription } = require('./validation')
 
 // регистрация
