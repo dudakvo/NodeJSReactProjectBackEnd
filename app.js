@@ -1,23 +1,27 @@
-const express = require('express');
-const logger = require('morgan');
-const cors = require('cors');
+const express = require("express");
+const logger = require("morgan");
+const cors = require("cors");
 
-const {HttpCode}=require('./helpers/constants');
+const sprintRouter = require("./routes/sprint");
+
+const { HttpCode } = require("./helpers/constants");
 
 const app = express();
 
-app.use(logger('combined'));
+app.use(logger("combined"));
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res) => {
-    res.status(HttpCode.NOT_FOUND).json({ message: "Not found" });
-  });
-  
-  app.use((err, req, res, next) => {
-    const code = err.status || HttpCode.INTERNAL_SERVER_ERROR;
-    const status = err.status ? "error" : "fail";
-    res.status(code).json({ status, code, message: err });
-  });
+app.use("/sprint", sprintRouter);
 
-module.exports = app
+app.use((req, res) => {
+  res.status(HttpCode.NOT_FOUND).json({ message: "Not found" });
+});
+
+app.use((err, req, res, next) => {
+  const code = err.status || HttpCode.INTERNAL_SERVER_ERROR;
+  const status = err.status ? "error" : "fail";
+  res.status(code).json({ status, code, message: err });
+});
+
+module.exports = app;
