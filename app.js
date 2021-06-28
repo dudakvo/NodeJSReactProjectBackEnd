@@ -5,9 +5,9 @@ const boolParser = require("express-query-boolean");
 const helmet = require("helmet");
 const limiter = require("./helpers/limiter");
 
+const projectsRouter = require("./routes/project");
 const sprintRouter = require("./routes/sprint");
 const taskRouter = require("./routes/task");
-
 const usersRouter = require("./routes/users");
 const { HttpCode } = require("./helpers/constants");
 
@@ -23,6 +23,7 @@ app.use(cors());
 app.use(express.json({ limit: 15000 }));
 app.use(boolParser());
 
+app.use("/projects", projectsRouter);
 app.use("/api/users", usersRouter);
 app.use("/sprint", sprintRouter);
 app.use("/task", taskRouter);
