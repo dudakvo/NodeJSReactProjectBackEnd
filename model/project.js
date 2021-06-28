@@ -5,7 +5,7 @@ const addProject = async (body) => {
   return result;
 };
 
-const changeProjectName = async (id, body) => {
+const changeProjectName = async (userId, id, body) => {
   const result = await Project.findOneAndUpdate(
     { _id: id },
     { ...body },
@@ -18,8 +18,19 @@ const findProjectByName = async (name) => {
   return await Project.findOne({ name });
 };
 
-const removeProject = async (projectId) => {
-  const result = await Project.findByIdAndRemove({ _id: projectId });
+const removeProject = async (userId, projectId) => {
+  const result = await Project.findByIdAndRemove({
+    _id: projectId,
+    owner: userId,
+  });
+  return result;
+};
+
+const getAllProjects = async (userId) => {
+  const result = await Project.find({ owner: userId }).populate({
+    path: "owner",
+    select: "email -_id",
+  });
   return result;
 };
 
@@ -28,4 +39,5 @@ module.exports = {
   findProjectByName,
   changeProjectName,
   removeProject,
+  getAllProjects,
 };

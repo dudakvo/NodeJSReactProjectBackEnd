@@ -15,6 +15,9 @@ const projectSchema = new Schema(
       type: SchemaTypes.ObjectId,
       ref: "user",
     },
+    contributor: {
+      type: String,
+    },
   },
   { versionKey: false, timestamps: true }
 );
