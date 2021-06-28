@@ -7,6 +7,7 @@ const limiter = require("./helpers/limiter");
 
 const projectsRouter = require("./routes/project");
 const sprintRouter = require("./routes/sprint");
+const taskRouter = require("./routes/task");
 const usersRouter = require("./routes/users");
 const { HttpCode } = require("./helpers/constants");
 
@@ -25,6 +26,7 @@ app.use(boolParser());
 app.use("/projects", projectsRouter);
 app.use("/api/users", usersRouter);
 app.use("/sprint", sprintRouter);
+app.use("/task", taskRouter);
 
 app.use((req, res) => {
   res.status(HttpCode.NOT_FOUND).json({ message: "Not found" });
