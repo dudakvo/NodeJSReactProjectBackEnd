@@ -7,7 +7,7 @@ const taskSchema = new Schema({
   scheduled_hours: { type: Number, required: [true, "Set scheduled hours"] },
   hours_spent: { type: Number, default: 0 },
   hours_spent_per_day: { type: Number, default: 0 },
-  sprint_id: {
+  sprint: {
     type: SchemaTypes.ObjectId,
     ref: "sprint",
     required: [true, "Set sprint ID"],
