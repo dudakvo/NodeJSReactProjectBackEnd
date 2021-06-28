@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const { Subscription, HttpCode } = require('../../helpers/constants')
+const {  HttpCode } = require('../../helpers/constants')
 
 const schemaSignup = Joi.object({
   email: Joi.string()
@@ -9,9 +9,7 @@ const schemaSignup = Joi.object({
     })
     .required(),
   password: Joi.alternatives().try(Joi.number(), Joi.string()).required(),
-  subscription: Joi.string()
-    .valid(Subscription.STARTER, Subscription.PRO, Subscription.BUSINESS)
-    .optional(),
+  
 })
 
 const schemaLogin = Joi.object({
@@ -22,11 +20,7 @@ const schemaLogin = Joi.object({
 
 })
 
-const schemaUpdateSubscription = Joi.object({
-  subscription: Joi.string()
-    .valid(Subscription.STARTER, Subscription.PRO, Subscription.BUSINESS)
-    .required()
-})
+
 
 const validate = async (schema, body, next) => {
   try {
@@ -45,8 +39,6 @@ const validateLogin = (req, _res, next) => {
   return validate(schemaLogin, req.body, next)
 }
 
-const validateUpdateSubcription = (req, _res, next) => {
-  return validate(schemaUpdateSubscription, req.body, next)
-}
 
-module.exports = { validateSignup, validateLogin, validateUpdateSubcription }
+
+module.exports = { validateSignup, validateLogin, }

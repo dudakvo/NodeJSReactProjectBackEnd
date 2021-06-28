@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const guard = require('../../helpers/guard')
-const { reg, login, logout,getCurrentUser,updateSubscription} = require('../../controllers/users')
+const { reg, login, logout,getCurrentUser,} = require('../../controllers/users')
 const { validateSignup, validateLogin, validateUpdateSubcription } = require('./validation')
 
 // регистрация
@@ -15,8 +15,5 @@ router.post('/logout', guard, logout)
 
 // данные текущего пользователя
 router.get('/current', guard, getCurrentUser)
-
-// обновление подписки
-router.patch('/', guard, validateUpdateSubcription, updateSubscription)
 
 module.exports = router
