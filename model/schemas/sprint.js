@@ -6,6 +6,7 @@ const sprintSchema = new Schema({
   sprint_name: { type: String, required: [true, "Set name for sprint"] },
   date_start: { type: Date, default: new Date() },
   date_end: { type: Date, default: new Date() },
+  task: [{ type: SchemaTypes.ObjectId, ref: "task" }],
   project_id: {
     type: SchemaTypes.ObjectId,
     ref: "project",
