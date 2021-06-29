@@ -1,4 +1,10 @@
 const express = require("express");
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+
+
 const logger = require("morgan");
 const cors = require("cors");
 const boolParser = require("express-query-boolean");
@@ -15,6 +21,8 @@ const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(helmet());
 app.use(limiter);
 app.use(logger(formatsLogger));
@@ -24,7 +32,7 @@ app.use(express.json({ limit: 15000 }));
 app.use(boolParser());
 
 app.use("/projects", projectsRouter);
-app.use("/api/users", usersRouter);
+app.use("/users", usersRouter);
 app.use("/sprint", sprintRouter);
 app.use("/task", taskRouter);
 
