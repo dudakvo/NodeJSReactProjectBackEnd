@@ -22,7 +22,7 @@ taskSchema.post("save", async function (next) {
   console.log(
     `after save hook runing this.sptint=${this.sprint} this._id=${this._id}`
   );
-  Sprint.updateOne({ _id: this.sprint }, { task: [this._id] });
+  Sprint.updateOne({ _id: this.sprint }, { $push: { task: this.sprint } });
 
   //  next();
 });

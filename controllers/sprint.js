@@ -1,4 +1,5 @@
 const { HttpCode } = require("../helpers/constants");
+const { getProjectByID } = require("../model/project");
 const Sprint = require("../model/sprint");
 
 const addSprint = async (req, res, next) => {
@@ -14,13 +15,13 @@ const addSprint = async (req, res, next) => {
 
 const getSprints = async (req, res, next) => {
   try {
-    // const userID = req.user.id;
     const sprints = await Sprint.listByProjectID(req.params.projectID);
+    const project = await getProjectByID(req.params.projectID);
     if (sprints) {
       return res.status(HttpCode.OK).json({
         status: "success",
         code: HttpCode.OK,
-        data: sprints,
+        data: { project, sprints },
       });
     }
     return res.status(HttpCode.NOT_FOUND).json({
@@ -35,7 +36,6 @@ const getSprints = async (req, res, next) => {
 
 const editSprint = async (req, res, next) => {
   try {
-    // const userID = req.user.id;
     if (req.body.sprint_name) {
       const result = await Sprint.edit(
         req.params.sprintID,

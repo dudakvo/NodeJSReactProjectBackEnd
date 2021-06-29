@@ -34,10 +34,19 @@ const getAllProjects = async (userId) => {
   return result;
 };
 
+const getProjectByID = async (projectID) => {
+  try {
+    return await Project.findOne({ _id: projectID });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 module.exports = {
   addProject,
   findProjectByName,
   changeProjectName,
   removeProject,
   getAllProjects,
+  getProjectByID,
 };
