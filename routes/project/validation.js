@@ -10,6 +10,15 @@ const schemaUpdateProject = Joi.object({
   name: Joi.string().min(1).max(30).required(),
 });
 
+const schemaAddParticipant = Joi.object({
+  name: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net", "ua"] },
+    })
+    .required(),
+});
+
 const validate = async (schema, body, next) => {
   try {
     await schema.validateAsync(body);
@@ -26,4 +35,8 @@ module.exports.validateCreateProject = (req, res, next) => {
 
 module.exports.validateUpdateProject = (req, res, next) => {
   return validate(schemaUpdateProject, req.body, next);
+};
+
+module.exports.validateAddParticipant = (req, res, next) => {
+  return validate(schemaAddParticipant, req.body, next);
 };

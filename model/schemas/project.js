@@ -9,14 +9,15 @@ const projectSchema = new Schema(
     },
     description: {
       type: String,
-      default: null,
+      required: true,
     },
     owner: {
       type: SchemaTypes.ObjectId,
       ref: "user",
     },
-    contributor: {
-      type: String,
+    participants: {
+      type: Object,
+      default: [],
     },
   },
   { versionKey: false, timestamps: true }

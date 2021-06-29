@@ -5,13 +5,16 @@ const {
   changeProjectName,
   removeProject,
   getAllProjects,
+  attachParticipant,
+  findUserByEmail,
+  findParticipant,
 } = require("../model/project");
 
 const createProject = async (req, res, next) => {
   try {
     const userId = await req.user.id;
     if (req.body.name) {
-      const projectIsExisted = await findProjectByName(req.body.name);
+      const projectIsExisted = await findProjectByName(userId, req.body.name);
       if (projectIsExisted) {
         return res.status(HttpCode.CONFLICT).json({
           status: "error",
@@ -37,7 +40,6 @@ const createProject = async (req, res, next) => {
       });
     }
   } catch (e) {
-    console.log(e.message);
     next(e);
   }
 };
@@ -126,9 +128,66 @@ const getProjectsByUser = async (req, res, next) => {
   }
 };
 
+const addParticipant = async (req, res, next) => {
+  try {
+    if (Object.keys(req.body).length === 0) {
+      return res.status(HttpCode.BAD_REQUEST).json({
+        status: "error",
+        code: HttpCode.BAD_REQUEST,
+        message: "missing fields",
+      });
+    }
+    if (req.body.name) {
+      const user = await findUserByEmail(req.body.name);
+      if (!user) {
+        return res.status(HttpCode.BAD_REQUEST).json({
+          status: "error",
+          code: HttpCode.BAD_REQUEST,
+          message: `This user is not found`,
+        });
+      } else if (req.body.name === req.user.email) {
+        console.log(req.user.email);
+        return res.status(HttpCode.CONFLICT).json({
+          status: "error",
+          code: HttpCode.CONFLICT,
+          message: `You cant add yourself as a participant`,
+        });
+      }
+      const participant = await findParticipant(req.body.name);
+      if (participant) {
+        return res.status(HttpCode.CONFLICT).json({
+          status: "error",
+          code: HttpCode.CONFLICT,
+          message: `This user is already attached to your project`,
+        });
+      }
+      const { email, id } = await user;
+      const userParams = {
+        email,
+        id,
+      };
+      const project = await attachParticipant(req.params.projectId, userParams);
+      return res.status(HttpCode.CREATED).json({
+        status: "success",
+        code: HttpCode.CREATED,
+        data: { project },
+      });
+    }
+
+    return res.status(HttpCode.BAD_REQUEST).json({
+      status: "error",
+      code: HttpCode.BAD_REQUEST,
+      message: "Not found",
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   createProject,
   editProjectName,
   delProject,
   getProjectsByUser,
+  addParticipant,
 };
