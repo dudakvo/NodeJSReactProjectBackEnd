@@ -10,19 +10,12 @@ const create = async (body) => {
 
 const listBySprintID = async (sprintID) => {
   try {
-    return await Task.find({ sprint: sprintID }).populate({
-      path: "sprint",
-      select: "sprint_name date_start date_end",
-    });
+    return await Task.find({ sprint: sprintID });
   } catch (error) {
     console.log(error.message);
   }
 };
-// sprint
-// populate({
-//   path: "sprint",
-//   select: "sprint_name, date_start, date_end",
-// })
+
 const edit = async (taskID, hoursSpentPerDay) => {
   try {
     return await Task.findOneAndUpdate(

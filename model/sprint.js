@@ -28,6 +28,14 @@ const edit = async (sprintID, sprintName) => {
   }
 };
 
+const getSprintByID = async (sprintID) => {
+  try {
+    return await Sprint.find({ _id: sprintID });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const removeByID = async (ID) => {
   try {
     return await Sprint.findByIdAndRemove({ _id: ID });
@@ -36,4 +44,4 @@ const removeByID = async (ID) => {
   }
 };
 
-module.exports = { create, listByProjectID, edit, removeByID };
+module.exports = { create, listByProjectID, edit, removeByID, getSprintByID };
