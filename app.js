@@ -1,7 +1,7 @@
 const express = require("express");
+const boolParser = require("express-query-boolean");
 const logger = require("morgan");
 const cors = require("cors");
-const boolParser = require("express-query-boolean");
 const helmet = require("helmet");
 const limiter = require("./helpers/limiter");
 
