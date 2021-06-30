@@ -1,0 +1,172 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Документация по BACKEND",
+      "description": "",
+      "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "host": "localhost:4000",
+    "basePath": "/api/",
+    "paths": {
+      "/project": {
+        "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "swagTest",
+          "tags": ["/project"],
+          "description": "",
+          "parameters": [],
+          "responses": {}
+        },
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "swagTest",
+            "tags": ["/project"],
+            "description": "",
+            "parameters": [],
+            "responses": {}
+          }
+        },
+          "/project:projectId": {
+            "patch": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "swagTest",
+              "tags": ["/project"],
+              "description": "",
+              "parameters": [],
+              "responses": {}
+            },
+            "delete": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "swagTest",
+                "tags": ["/project"],
+                "description": "",
+                "parameters": [],
+                "responses": {}
+              }
+            
+            }
+    },
+    "/sprint": {
+        "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "swagTest",
+          "tags": ["/sprint"],
+          "description": "",
+          "parameters": [],
+          "responses": {}
+        },
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "swagTest",
+            "tags": ["/sprint"],
+            "description": "",
+            "parameters": [],
+            "responses": {}
+          }
+        },
+          "/sprint:sprintID": {
+            "patch": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "swagTest",
+              "tags": ["/sprint"],
+              "description": "",
+              "parameters": [],
+              "responses": {}
+            },
+            "delete": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "swagTest",
+                "tags": ["/sprint"],
+                "description": "",
+                "parameters": [],
+                "responses": {}
+              }
+            
+            },
+            
+    
+    "/task": {
+        "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "swagTest",
+          "tags": ["/task"],
+          "description": "",
+          "parameters": [],
+          "responses": {}
+        },
+        
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "swagTest",
+            "tags": ["/task"],
+            "description": "",
+            "parameters": [],
+            "responses": {}
+          }
+        },
+          "/taskt:taskID": {
+             "get": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "swagTest",
+          "tags": ["/task"],
+          "description": "",
+          "parameters": [],
+          "responses": {}
+        },
+            "patch": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "swagTest",
+              "tags": ["/task"],
+              "description": "",
+              "parameters": [],
+              "responses": {}
+            },
+            "delete": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "swagTest",
+                "tags": ["/task"],
+                "description": "",
+                "parameters": [],
+                "responses": {}
+              }
+            
+            },
+    
+    "/users": {
+        "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "swagTest",
+          "tags": ["/project"],
+          "description": "",
+          "parameters": [],
+          "responses": {}
+        },
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "swagTest",
+            "tags": ["/project"],
+            "description": "",
+            "parameters": [],
+            "responses": {}
+          },
+              "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "swagTest",
+            "tags": ["/project"],
+            "description": "",
+            "parameters": [],
+            "responses": {}
+          },
+              "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "swagTest",
+            "tags": ["/project"],
+            "description": "",
+            "parameters": [],
+            "responses": {}
+          }
+        }
+    }     
+    
+  

@@ -2,9 +2,9 @@ const express = require("express");
 const ctrl = require("../../controllers/sprint");
 const router = express.Router();
 
-router.get("/", ctrl.getSprint);
+router.get("/:projectID", ctrl.getSprints);
 router.post("/", ctrl.addSprint);
-router.patch("/:id", ctrl.editSprint);
-router.delete("/:id", ctrl.editSprint);
+router.patch("/:sprintID", ctrl.editSprint);
+router.delete("/:sprintID", ctrl.removeSprint);
 
 module.exports = router;
