@@ -54,6 +54,13 @@ const findParticipant = async (email) => {
   });
   return await result;
 };
+const getProjectByID = async (projectID) => {
+  try {
+    return await Project.findOne({ _id: projectID });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 module.exports = {
   addProject,
@@ -64,4 +71,5 @@ module.exports = {
   attachParticipant,
   findUserByEmail,
   findParticipant,
+  getProjectByID,
 };
