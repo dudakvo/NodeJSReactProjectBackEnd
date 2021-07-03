@@ -8,9 +8,18 @@ const create = async (body) => {
   }
 };
 
-const listByProjectID = async (projectID) => {
+const listByProjectID = async (projectID, query) => {
+  const { limit = 5, page = 1 } = query;
+  const optionSearch = { project_id: projectID };
   try {
-    return await Sprint.find({ project_id: projectID });
+    const { docs: sprints, totalDocs: total } = await Sprint.paginate(
+      optionSearch,
+      {
+        limit,
+        page,
+      }
+    );
+    return { total, page, sprints };
   } catch (error) {
     console.log(error.message);
   }
