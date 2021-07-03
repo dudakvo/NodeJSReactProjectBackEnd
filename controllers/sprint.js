@@ -15,7 +15,10 @@ const addSprint = async (req, res, next) => {
 
 const getSprints = async (req, res, next) => {
   try {
-    const sprints = await Sprint.listByProjectID(req.params.projectID);
+    const sprints = await Sprint.listByProjectID(
+      req.params.projectID,
+      req.query
+    );
     const project = await getProjectByID(req.params.projectID);
     if (sprints) {
       return res.status(HttpCode.OK).json({
