@@ -18,7 +18,7 @@ const getTaskBySprintID = async (req, res, next) => {
   try {
     // const userID = req.user.id;
     const sprint = await getSprintByID(req.params.sprintID);
-    const task = await Task.listBySprintID(req.params.sprintID);
+    const task = await Task.listBySprintID(req.params.sprintID, req.query);
     if (task) {
       return res.status(HttpCode.OK).json({
         status: "success",
