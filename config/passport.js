@@ -16,7 +16,7 @@ try {
         if (!user) {
           return done(new Error("User not found"), false);
         }
-        if (!user.verify) {
+        if (!user.token) {
           return done(null, false);
         }
         return done(null, user);
