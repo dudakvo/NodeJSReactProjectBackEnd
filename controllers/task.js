@@ -1,6 +1,8 @@
 const { HttpCode } = require("../helpers/constants");
 const Task = require("../model/task");
 
+const { getSprintByID } = require("../model/sprint");
+
 const addTask = async (req, res, next) => {
   try {
     const taskAdded = await Task.create(req.body);
@@ -15,12 +17,13 @@ const addTask = async (req, res, next) => {
 const getTaskBySprintID = async (req, res, next) => {
   try {
     // const userID = req.user.id;
-    const task = await Task.listBySprintID(req.params.sprintID);
+    const sprint = await getSprintByID(req.params.sprintID);
+    const task = await Task.listBySprintID(req.params.sprintID, req.query);
     if (task) {
       return res.status(HttpCode.OK).json({
         status: "success",
         code: HttpCode.OK,
-        data: task,
+        data: { sprint, task },
       });
     }
     return res.status(HttpCode.NOT_FOUND).json({
