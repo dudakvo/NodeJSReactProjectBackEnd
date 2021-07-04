@@ -9,7 +9,7 @@ const schemaCreateSprint = Joi.object({
 });
 
 const schemaUpdateSprint = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
+  sprint_name: Joi.string().min(3).max(30).required(),
 });
 
 const validate = async (schema, body, next) => {
