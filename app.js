@@ -24,7 +24,7 @@ app.use(express.json({ limit: 15000 }));
 app.use(boolParser());
 
 app.use("/projects", projectsRouter);
-app.use("/api/users", usersRouter);
+app.use("/users", usersRouter);
 app.use("/sprint", sprintRouter);
 app.use("/task", taskRouter);
 
