@@ -2,8 +2,8 @@ const express = require("express");
 const boolParser = require("express-query-boolean");
 const logger = require("morgan");
 const cors = require("cors");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 const helmet = require("helmet");
 const limiter = require("./helpers/limiter");
 
@@ -26,11 +26,11 @@ app.use(express.json({ limit: 15000 }));
 app.use(boolParser());
 
 app.use("/projects", projectsRouter);
-app.use("/api/users", usersRouter);
+app.use("/users", usersRouter);
 app.use("/sprint", sprintRouter);
 app.use("/task", taskRouter);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
   res.status(HttpCode.NOT_FOUND).json({ message: "Not found" });
