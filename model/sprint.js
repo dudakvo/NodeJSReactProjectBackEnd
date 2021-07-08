@@ -9,7 +9,7 @@ const create = async (body) => {
 };
 
 const listByProjectID = async (projectID, query) => {
-  const { limit = 5, page = 1 } = query;
+  const { limit = 30, page = 1 } = query;
   const optionSearch = { project_id: projectID };
   try {
     const { docs: sprints, totalDocs: total } = await Sprint.paginate(
