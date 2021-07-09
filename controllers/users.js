@@ -17,11 +17,14 @@ const reg = async (req, res, next) => {
       });
     }
     const newUser = await Users.create(req.body);
-    const { email, subscription } = newUser;
-    return res.status(HttpCode.CREATED).json({
+    const { email, subscription} = newUser;
+    const payload = { id: newUser.id } ;
+    const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: "1w" });
+    await Users.updateToken(newUser.id, token)
+     return res.status(HttpCode.CREATED).json({
       status: "success",
       code: HttpCode.CREATED,
-      data: { user: { email, subscription } },
+      data: {token, user: { email, subscription } },
     });
   } catch (err) {
     next(err);
