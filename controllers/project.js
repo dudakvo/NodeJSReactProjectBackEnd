@@ -138,14 +138,11 @@ const addParticipant = async (req, res, next) => {
       });
     }
     if (req.body.name) {
-      const user = await findUserByEmail(req.body.name);
-      if (!user) {
-        return res.status(HttpCode.BAD_REQUEST).json({
-          status: "error",
-          code: HttpCode.BAD_REQUEST,
-          message: `This user is not found`,
-        });
-      } else if (req.body.name === req.user.email) {
+      const user = {
+        id: req.body.id,
+        name: req.body.name,
+      };
+      if (req.body.name === req.user.email) {
         console.log(req.user.email);
         return res.status(HttpCode.CONFLICT).json({
           status: "error",
@@ -161,12 +158,7 @@ const addParticipant = async (req, res, next) => {
           message: `This user is already attached to your project`,
         });
       }
-      const { email, id } = await user;
-      const userParams = {
-        email,
-        id,
-      };
-      const project = await attachParticipant(req.params.projectId, userParams);
+      const project = await attachParticipant(req.params.projectId, user);
       return res.status(HttpCode.CREATED).json({
         status: "success",
         code: HttpCode.CREATED,
