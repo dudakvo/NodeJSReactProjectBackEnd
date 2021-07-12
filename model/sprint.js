@@ -8,9 +8,18 @@ const create = async (body) => {
   }
 };
 
-const listByProjectID = async (projectID) => {
+const listByProjectID = async (projectID, query) => {
+  const { limit = 30, page = 1 } = query;
+  const optionSearch = { project_id: projectID };
   try {
-    return await Sprint.find({ project_id: projectID });
+    const { docs: sprints, totalDocs: total } = await Sprint.paginate(
+      optionSearch,
+      {
+        limit,
+        page,
+      }
+    );
+    return { total, page, sprints };
   } catch (error) {
     console.log(error.message);
   }
@@ -28,6 +37,14 @@ const edit = async (sprintID, sprintName) => {
   }
 };
 
+const getSprintByID = async (sprintID) => {
+  try {
+    return await Sprint.find({ _id: sprintID });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 const removeByID = async (ID) => {
   try {
     return await Sprint.findByIdAndRemove({ _id: ID });
@@ -36,4 +53,4 @@ const removeByID = async (ID) => {
   }
 };
 
-module.exports = { create, listByProjectID, edit, removeByID };
+module.exports = { create, listByProjectID, edit, removeByID, getSprintByID };

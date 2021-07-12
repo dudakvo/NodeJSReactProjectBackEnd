@@ -46,7 +46,7 @@ const createProject = async (req, res, next) => {
 
 const editProjectName = async (req, res, next) => {
   try {
-    const userId = await req.user.id;
+    //  const userId = await req.user.id;
     if (Object.keys(req.body).length === 0) {
       return res.status(HttpCode.BAD_REQUEST).json({
         status: "error",
@@ -54,32 +54,11 @@ const editProjectName = async (req, res, next) => {
         message: "missing fields",
       });
     }
-    if (req.body.name) {
-      const projectIsExisted = await findProjectByName(req.body.name);
-      if (projectIsExisted) {
-        return res.status(HttpCode.CONFLICT).json({
-          status: "error",
-          code: HttpCode.CONFLICT,
-          message: `Project with name ${req.body.name} already exists`,
-        });
-      } else {
-        const project = await changeProjectName(
-          userId,
-          req.params.projectId,
-          req.body
-        );
-        return res.status(HttpCode.CREATED).json({
-          status: "success",
-          code: HttpCode.CREATED,
-          data: { project },
-        });
-      }
-    }
-
-    return res.status(HttpCode.BAD_REQUEST).json({
-      status: "error",
-      code: HttpCode.BAD_REQUEST,
-      message: "Not found",
+    const project = await changeProjectName(req.params.projectId, req.body);
+    return res.status(HttpCode.CREATED).json({
+      status: "success",
+      code: HttpCode.CREATED,
+      data: { project },
     });
   } catch (e) {
     next(e);

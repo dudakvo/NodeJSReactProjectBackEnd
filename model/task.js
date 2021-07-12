@@ -8,21 +8,20 @@ const create = async (body) => {
   }
 };
 
-const listBySprintID = async (sprintID) => {
+const listBySprintID = async (sprintID, query) => {
+  const { limit = 5, page = 1 } = query;
+  const optionSearch = { sprint: sprintID };
   try {
-    return await Task.find({ sprint: sprintID }).populate({
-      path: "sprint",
-      select: "sprint_name date_start date_end",
+    const { docs: task, totalDocs: total } = await Task.paginate(optionSearch, {
+      limit,
+      page,
     });
+    return { total, page, task };
   } catch (error) {
     console.log(error.message);
   }
 };
-// sprint
-// populate({
-//   path: "sprint",
-//   select: "sprint_name, date_start, date_end",
-// })
+
 const edit = async (taskID, hoursSpentPerDay) => {
   try {
     return await Task.findOneAndUpdate(
