@@ -6,7 +6,6 @@ const {
   removeProject,
   getAllProjects,
   attachParticipant,
-  findUserByEmail,
   findParticipant,
 } = require("../model/project");
 

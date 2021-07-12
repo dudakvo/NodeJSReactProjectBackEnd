@@ -11,7 +11,12 @@ const {
 router.get("/", guard, ctrl.getProjectsByUser);
 router.post("/", guard, validateCreateProject, ctrl.createProject);
 router.patch("/:projectId", guard, validateUpdateProject, ctrl.editProjectName);
-router.patch(  "/:projectId/invite",guard,validateAddParticipant,ctrl.addParticipant);
+router.patch(
+  "/:projectId/invite",
+  guard,
+  validateAddParticipant,
+  ctrl.addParticipant
+);
 router.delete("/:projectId", guard, ctrl.delProject);
 
 module.exports = router;
